@@ -6,3 +6,13 @@ class Drawing {
 		this.name = name
 	}
 }
+
+function find(arr, key){
+	x = 0
+	while (x < arr.length){
+		if (arr[x] == key){
+			return x
+		}
+		x++
+	}
+	}

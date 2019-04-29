@@ -27,9 +27,6 @@
 		
 		var game = new Phaser.Game(config);
 		var cursors;
-		var player = {
-			x: 50,
-			y: 50
 		var drawstack = []
 		}
 		function preload()
@@ -66,20 +63,20 @@
 		{
 			if (cursors.left.isDown)
 			{
-				player.x -= 1;
+				drawstack[f.find(drawstack,'hero')].x -=1;
 			}
 			if (cursors.right.isDown)
 			{
-				player.x += 1;
+				drawstack[f.find(drawstack,'hero')].x +1;
 			}
 			if (cursors.down.isDown)
 			{
-				player.y +=1;
+				drawstack[f.find(drawstack,'hero')].y +=1;
 				console.log('pressing down');
 			}
 			if (cursors.up.isDown)
 			{
-				player.y -=1;
+				drawstack[f.find(drawstack,'hero')].y -=1;
 			}
 			this.drawall()
 		}
