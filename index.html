@@ -33,14 +33,10 @@
 		function find(arr, key){
 			x = 0;
 			while (x < arr.length){
-				console.log(x);
-				console.log(arr[x]);
-				console.log(key);
 				if (arr[x].name == key){
-					console.log('match found');
 					return x;
 				}
-				x+=1;
+				x++;
 			}
 		}
 		
@@ -50,7 +46,7 @@
 				while(x < drawstack.length)
 				{
 					drawing = drawstack[x];
-					scene.add.image(drawing.x,drawing.y,drawing.img);
+					scene.add.image(drawing.x,drawing.y,drawing.img).setOrigin(0,0);
 					x++;
 				}
 			}
@@ -84,13 +80,11 @@
 			if (cursors.right.isDown)
 			{
 				var x = find(drawstack,'hero');
-				drawstack[x].x +1;
+				drawstack[x].x +=1;
 			}
 			if (cursors.down.isDown)
 			{
 				var x = find(drawstack,'hero');
-				console.log(x);
-				console.log(drawstack[0]);
 				drawstack[x].y +=1;
 				console.log('pressing down');
 			}
