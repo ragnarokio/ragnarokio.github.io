@@ -14,6 +14,7 @@
 
 <body>
 	<script type="text/javascript">
+		
 		var config = {
 			type: Phaser.AUTO,
 			width: 800,
@@ -29,6 +30,17 @@
 		var cursors;
 		var drawstack = [];
 		
+		function drawall(scene)
+			{
+				var x = 0;
+				while(x < drawstack.length)
+				{
+					drawing = drawstack[x];
+					scene.add.image(drawing.x,drawing.y,drawing.img);
+					x++;
+				}
+			}
+			
 		function preload()
 		{
 			this.load.image('dude','assets/dude.png');
@@ -40,16 +52,6 @@
 			
 			cursors = this.input.keyboard.createCursorKeys()
 			
-			function drawall(scene)
-			{
-				var x = 0;
-				while(x < drawstack.length)
-				{
-					drawing = drawstack[x];
-					scene.add.image(drawing.x,drawing.y,drawing.img);
-					x++;
-				}
-			}
 		}
 		
 		function create()
