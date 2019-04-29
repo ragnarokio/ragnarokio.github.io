@@ -1,38 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Just Another Clicker Game</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  
+<html lang="en"> 
+<head> 
+    <meta charset="UTF-8" />
+    <title>Just another Clicker Game</title>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
 </head>
-  <body>
-    <div class ="container">
-		<div class='row'>
-			<p>navbar goes here</p>
-		</div>
-		<div class='row'>
-			<div class ='col-xl-2'>
-			<p>1
-			2
-			3
-			4
-			5</p>
-			</div>
-			<div class ='col-xl-10'><p>main area</p></div>
-			<div class = 'col-xl-12'>
-				<p>1
-			2
-			3
-			4
-			5</p>
-			</div>
-		</div>
-		<p>nice meme website</p>
-	</div>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-  </body>
-</html>
+<body>
+	var config = {
+		type: Phaser.AUTO
+		width: 800,
+		height: 800,
+		scene: {
+			preload: preload,
+			create: create,
+			update: update
+		}
+	};
+	
+	var game = new Phaser.Game(config);
+	
+	function preload()
+	{
+	}
+	
+	function create()
+	{
+	}
+	
+	function update()
+	{
+	}
+	
+</body>
