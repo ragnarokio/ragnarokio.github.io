@@ -26,8 +26,8 @@
 		var game = new Phaser.Game(config);
 		var cursors;
 		var player = {
-			x: 0,
-			y: 0
+			x: 50,
+			y: 50
 		}
 		function preload()
 		{
@@ -55,6 +55,7 @@
 			if (cursors.down.isDown)
 			{
 				player.y +=1;
+				console.log('pressing down')
 			}
 			if (cursors.up.isDown)
 			{
