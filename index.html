@@ -33,7 +33,11 @@
 		function find(arr, key){
 			x = 0;
 			while (x < arr.length){
+				log.output(x);
+				log.output(arr[x]);
+				log.output(key);
 				if (arr[x] == key){
+					log.output('match found');
 					return x;
 				}
 				x++;
