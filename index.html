@@ -61,7 +61,7 @@
 			drawstack.push(new Drawing(0,0,'dude','hero'));
 			
 			cursors = this.input.keyboard.createCursorKeys()
-			console.log(drawstack)
+			console.log(drawstack[find(drawstack,'hero')].y
 			
 		}
 		
@@ -83,7 +83,6 @@
 			}
 			if (cursors.down.isDown)
 			{
-				console.log(drawstack[0].y)
 				drawstack[find(drawstack,'hero')].y +=1;
 				console.log('pressing down');
 			}
