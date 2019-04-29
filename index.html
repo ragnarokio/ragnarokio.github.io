@@ -35,8 +35,8 @@
 			this.load.image('sky','assets/sky.png');
 			
 			
-			drawstack.push(f.Drawing(0,0,'sky','bg'));
-			drawstack.push(f.Drawing(0,0,'dude','hero'));
+			drawstack.push(Drawing(0,0,'sky','bg'));
+			drawstack.push(Drawing(0,0,'dude','hero'));
 			
 			cursors = this.input.keyboard.createCursorKeys()
 			
@@ -62,20 +62,20 @@
 		{
 			if (cursors.left.isDown)
 			{
-				drawstack[f.find(drawstack,'hero')].x -=1;
+				drawstack[find(drawstack,'hero')].x -=1;
 			}
 			if (cursors.right.isDown)
 			{
-				drawstack[f.find(drawstack,'hero')].x +1;
+				drawstack[find(drawstack,'hero')].x +1;
 			}
 			if (cursors.down.isDown)
 			{
-				drawstack[f.find(drawstack,'hero')].y +=1;
+				drawstack[find(drawstack,'hero')].y +=1;
 				console.log('pressing down');
 			}
 			if (cursors.up.isDown)
 			{
-				drawstack[f.find(drawstack,'hero')].y -=1;
+				drawstack[find(drawstack,'hero')].y -=1;
 			}
 			this.drawall()
 		}
