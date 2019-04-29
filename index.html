@@ -75,23 +75,23 @@
 			if (cursors.left.isDown)
 			{
 				var x = find(drawstack,'hero');
-				drawstack[x].x -=1;
+				drawstack[x].x -=5;
 			}
 			if (cursors.right.isDown)
 			{
 				var x = find(drawstack,'hero');
-				drawstack[x].x +=1;
+				drawstack[x].x +=5;
 			}
 			if (cursors.down.isDown)
 			{
 				var x = find(drawstack,'hero');
-				drawstack[x].y +=1;
+				drawstack[x].y +=5;
 				console.log('pressing down');
 			}
 			if (cursors.up.isDown)
 			{
 				var x = find(drawstack,'hero');
-				drawstack[x].y -=1;
+				drawstack[x].y -=5;
 			}
 			drawall(this);
 		}
