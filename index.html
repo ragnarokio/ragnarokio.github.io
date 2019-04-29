@@ -3,8 +3,7 @@
 <head> 
     <meta charset="UTF-8" />
     <title>Just another Clicker Game</title>
-    <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
-    <script src="/f.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.js"></script>
     <style type="text/css">
         body {
             margin: 0;
@@ -13,96 +12,13 @@
 </head>
 
 <body>
-	<script type="text/javascript">
-		
-		var config = {
-			type: Phaser.AUTO,
-			width: 800,
-			height: 800,
-			scene: {
-				preload: preload,
-				create: create,
-				update: update
-			}
-		}
-		
-		var game = new Phaser.Game(config);
-		var cursors;
-		var drawstack = [];
-		var changed = false;
-		
-		function find(arr, key){
-			x = 0;
-			while (x < arr.length){
-				if (arr[x].name == key){
-					return x;
-				}
-				x++;
-			}
-		}
-		
-		function drawall(scene)
-			{
-				var x = 0;
-				while(x < drawstack.length)
-				{
-					drawing = drawstack[x];
-					scene.add.image(drawing.x,drawing.y,drawing.img).setOrigin(0,0);
-					x++;
-				}
-			}
-			
-		function preload()
-		{
-			this.load.image('dude','assets/dude.png');
-			this.load.image('sky','assets/sky.png');
-			
-			
-			drawstack.push(new Drawing(0,0,'sky','bg'));
-			drawstack.push(new Drawing(0,0,'dude','hero'));
-			
-			cursors = this.input.keyboard.createCursorKeys();
-			
-		}
-		
-		function create()
-		{
-			this.add.image(0,0,'sky').setOrigin(0,0);
-			this.add.image(375,375,'dude').setOrigin(0,0);
-		}
-		
-		function update()
-		{
-			changed = false;
-			if (cursors.left.isDown)
-			{
-				var x = find(drawstack,'hero');
-				drawstack[x].x -=5;
-				changed = true;
-			}
-			if (cursors.right.isDown)
-			{
-				var x = find(drawstack,'hero');
-				drawstack[x].x +=5;
-				changed = true
-			}
-			if (cursors.down.isDown)
-			{
-				var x = find(drawstack,'hero');
-				drawstack[x].y +=5;
-				console.log('pressing down');
-				changed = true
-			}
-			if (cursors.up.isDown)
-			{
-				var x = find(drawstack,'hero');
-				drawstack[x].y -=5;
-				changed = true
-			}
-			if(changed == true){
-				drawall(this);
-			}
-		}
-	</script>
-	
+<script type="text/javascript">
+function setup(){
+	createCanvas(1000,800);
+	bg = loadImage('assets/bg.png');
+}
+function draw(){
+	image(bg,0,0);
+}
+</script>
 </body>
