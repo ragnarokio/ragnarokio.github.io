@@ -24,11 +24,16 @@
 		};
 		
 		var game = new Phaser.Game(config);
-		
+		var cursors;
+		var player = {
+			x: 0,
+			y: 0
+		}
 		function preload()
 		{
 			this.load.image('dude','assets/dude.png');
 			this.load.image('sky','assets/sky.png');
+			cursors = this.input.keyboard.createCursorKeys()
 		}
 		
 		function create()
@@ -39,6 +44,23 @@
 		
 		function update()
 		{
+			if (cursors.left.isDown)
+			{
+				player.x -= 1
+			}
+			if (cursors.right.isDown)
+			{
+				player.x += 1
+			}
+			if (cursors.down.isDown)
+			{
+				player.y +=1
+			}
+			if (cursors.up.isDown)
+			{
+				player.y -=1
+			}
+			
 		}
 	</script>
 	
