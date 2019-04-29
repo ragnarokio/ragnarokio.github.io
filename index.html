@@ -40,13 +40,13 @@
 			
 			cursors = this.input.keyboard.createCursorKeys()
 			
-			function drawall()
+			function drawall(scene)
 			{
 				var x = 0;
 				while(x < drawstack.length)
 				{
 					drawing = drawstack[x];
-					this.add.image(drawing.x,drawing.y,drawing.img);
+					scene.add.image(drawing.x,drawing.y,drawing.img);
 					x++;
 				}
 			}
@@ -77,7 +77,7 @@
 			{
 				drawstack[find(drawstack,'hero')].y -=1;
 			}
-			this.drawall()
+			drawall(this);
 		}
 	</script>
 	
