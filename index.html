@@ -31,7 +31,7 @@
 		var drawstack = [];
 		
 		function find(arr, key){
-			x = 0
+			x = 0;
 			while (x < arr.length){
 				if (arr[x] == key){
 					return x;
@@ -61,7 +61,6 @@
 			drawstack.push(new Drawing(0,0,'dude','hero'));
 			
 			cursors = this.input.keyboard.createCursorKeys();
-			console.log(drawstack[find(drawstack,'hero')]).y;
 			
 		}
 		
@@ -75,20 +74,24 @@
 		{
 			if (cursors.left.isDown)
 			{
-				drawstack[find(drawstack,'hero')].x -=1;
+				var x = find(drawstack,'hero');
+				drawstack[x].x -=1;
 			}
 			if (cursors.right.isDown)
 			{
-				drawstack[find(drawstack,'hero')].x +1;
+				var x = find(drawstack,'hero');
+				drawstack[x].x +1;
 			}
 			if (cursors.down.isDown)
 			{
-				drawstack[find(drawstack,'hero')].y +=1;
+				var x = find(drawstack,'hero');
+				drawstack[x].y +=1;
 				console.log('pressing down');
 			}
 			if (cursors.up.isDown)
 			{
-				drawstack[find(drawstack,'hero')].y -=1;
+				var x = find(drawstack,'hero');
+				drawstack[x].y -=1;
 			}
 			drawall(this);
 		}
