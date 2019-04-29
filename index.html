@@ -29,6 +29,7 @@
 		var game = new Phaser.Game(config);
 		var cursors;
 		var drawstack = [];
+		var changed = false;
 		
 		function find(arr, key){
 			x = 0;
@@ -72,28 +73,35 @@
 		
 		function update()
 		{
+			changed = false;
 			if (cursors.left.isDown)
 			{
 				var x = find(drawstack,'hero');
 				drawstack[x].x -=5;
+				changed = true;
 			}
 			if (cursors.right.isDown)
 			{
 				var x = find(drawstack,'hero');
 				drawstack[x].x +=5;
+				changed = true
 			}
 			if (cursors.down.isDown)
 			{
 				var x = find(drawstack,'hero');
 				drawstack[x].y +=5;
 				console.log('pressing down');
+				changed = true
 			}
 			if (cursors.up.isDown)
 			{
 				var x = find(drawstack,'hero');
 				drawstack[x].y -=5;
+				changed = true
 			}
-			drawall(this);
+			if(changed == true){
+				drawall(this);
+			}
 		}
 	</script>
 	
