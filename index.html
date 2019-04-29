@@ -4,12 +4,14 @@
     <meta charset="UTF-8" />
     <title>Just another Clicker Game</title>
     <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+    <script src="/f.js"></script>
     <style type="text/css">
         body {
             margin: 0;
         }
     </style>
 </head>
+
 <body>
 	<script type="text/javascript">
 		var config = {
@@ -28,18 +30,36 @@
 		var player = {
 			x: 50,
 			y: 50
+		var drawstack = []
 		}
 		function preload()
 		{
 			this.load.image('dude','assets/dude.png');
 			this.load.image('sky','assets/sky.png');
+			
+			
+			drawstack.push(f.Drawing(0,0,'sky','bg'));
+			drawstack.push(f.Drawing(0,0,'dude','hero'));
+			
+			this.load.image(
 			cursors = this.input.keyboard.createCursorKeys()
+			
+			function drawall()
+			{
+				var x = 0;
+				while(x < drawstack.length)
+				{
+					drawing = drawstack[x];
+					this.add.image(drawing.x,drawing.y,drawing.img);
+					x++;
+				}
+			}
 		}
 		
 		function create()
 		{
 			this.add.image(0,0,'sky').setOrigin(0,0);
-			this.add.image(player.x,player.y,'dude').setOrigin(0,0);
+			this.add.image(375,375,'dude').setOrigin(0,0);
 		}
 		
 		function update()
@@ -47,7 +67,6 @@
 			if (cursors.left.isDown)
 			{
 				player.x -= 1;
-				this.add.image(player.x,player.y,'dude').setOrigin(0,0);
 			}
 			if (cursors.right.isDown)
 			{
@@ -62,7 +81,7 @@
 			{
 				player.y -=1;
 			}
-			
+			this.drawall()
 		}
 	</script>
 	
