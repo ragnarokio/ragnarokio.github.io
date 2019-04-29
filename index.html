@@ -25,10 +25,14 @@
 	
 	function preload()
 	{
+		this.load.image('dude','assets/dude.png');
+		this.load.image('sky','assets/sky.png');
 	}
 	
 	function create()
 	{
+		this.add.image(0,0,'sky').setOrigin(0,0);
+		this.add.image(0,0,'dude').setOrigin(0,0);
 	}
 	
 	function update()
