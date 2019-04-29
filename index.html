@@ -1,3 +1,4 @@
+<!doctype html> 
 <html lang="en"> 
 <head> 
     <meta charset="UTF-8" />
@@ -11,34 +12,34 @@
 </head>
 <body>
 	<script type="text/javascript">
-	var config = {
-		type: Phaser.AUTO
-		width: 800,
-		height: 800,
-		scene: {
-			preload: preload,
-			create: create,
-			update: update
+		var config = {
+			type: Phaser.AUTO,
+			width: 800,
+			height: 800,
+			scene: {
+				preload: preload,
+				create: create,
+				update: update
+			}
+		};
+		
+		var game = new Phaser.Game(config);
+		
+		function preload()
+		{
+			this.load.image('dude','assets/dude.png');
+			this.load.image('sky','assets/sky.png');
 		}
-	};
-	
-	var game = new Phaser.Game(config);
-	
-	function preload()
-	{
-		this.load.image('dude','assets/dude.png');
-		this.load.image('sky','assets/sky.png');
-	}
-	
-	function create()
-	{
-		this.add.image(0,0,'sky').setOrigin(0,0);
-		this.add.image(0,0,'dude').setOrigin(0,0);
-	}
-	
-	function update()
-	{
-	}
+		
+		function create()
+		{
+			this.add.image(0,0,'sky').setOrigin(0,0);
+			this.add.image(0,0,'dude').setOrigin(0,0);
+		}
+		
+		function update()
+		{
+		}
 	</script>
 	
 </body>
