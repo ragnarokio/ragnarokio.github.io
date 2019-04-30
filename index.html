@@ -11,23 +11,25 @@
 	<script type="text/javascript">
 		
 		var monst
-		var yelt = 0
+		var yelt = 100000
 		var redt = 0
 		
 		function setup(){
 			var canv = createCanvas(800,650);
+			let mouseX
+			let mouseY
 			canv.parent('main');
 			bg = loadImage('assets/bg.png');
 			slime = loadImage('assets/slime.png');
-			monst = slime
-			image(bg,0,0);
-			image(monst,300,200)
+			farmico = loadImage('assets/farmicon.png');
 		}
 		
 		function draw(){
 			image(bg,0,0);
 			monst = slime;
 			image(monst,300,200);
+			image(farmico,0,50);
+			
 		}
 		
 		function yelresclick(){
@@ -45,11 +47,14 @@
 			document.getElementById('yeltotalp').innerHTML = String(yelt);
 			document.getElementById('redtotalp').innerHTML = String(redt);
 		}
-		
+		function mainLoop(){
+			requestAnimationFrame(mainLoop)
+		}
+		requestAnimationFrame(mainLoop)
 	</script>
 	<div id = 'main'>
 		<div id='monstername'>
-			<p>Small</p>
+			<p>Slime</p>
 		</div>
 		<div id='yeltotal'>
 			<p id='yeltotalp'>0</p>
