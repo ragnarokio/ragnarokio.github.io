@@ -5,24 +5,35 @@
     <title>Just another Clicker Game</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.js"></script>
     <style type="text/css">
-        body {
-            margin: 0;
-        }
+		div.scene {
+			position: relative;
+			width: 800px;
+			height: 650px;
+		}
+        div.monstername {
+			position: absolute;
+			top: 280px
+			left: 200px
+		}
     </style>
 </head>
 
 <body>
-<script type="text/javascript">
-function setup(){
-	createCanvas(1000,800);
-	bg = loadImage('assets/bg.png');
-	slime = loadImage('assets/slime.png');
-}
-function draw(){
-	image(bg,0,0);
-	monst = slime;
-	image(monst,300,200);
-}
-</script>
-<p>this is test text</p>
+	<div class='scene'>
+		<script type="text/javascript">
+			function setup(){
+				createCanvas(1000,800);
+				bg = loadImage('assets/bg.png');
+				slime = loadImage('assets/slime.png');
+			}
+			function draw(){
+				image(bg,0,0);
+				monst = slime;
+				image(monst,300,200);
+			}
+		</script>
+		<div class='monstername'>
+			<p>Slime</p>
+		</div>
+	</div>
 </body>
