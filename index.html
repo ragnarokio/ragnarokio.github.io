@@ -9,21 +9,59 @@
 
 <body>		
 	<script type="text/javascript">
+		
+		var monst
+		var yelt = 0
+		var redt = 0
+		
 		function setup(){
 			var canv = createCanvas(800,650);
 			canv.parent('main');
 			bg = loadImage('assets/bg.png');
 			slime = loadImage('assets/slime.png');
+			monst = slime
+			image(bg,0,0);
+			image(monst,300,200)
 		}
+		
 		function draw(){
 			image(bg,0,0);
 			monst = slime;
 			image(monst,300,200);
 		}
+		
+		function yelresclick(){
+			yelt += 1;
+			upnums()
+		}
+		
+		function redresclick(){
+			redt += 1;
+			upnums()
+			console.log('test')
+		}
+		
+		function upnums(){
+			document.getElementById('yeltotalp').innerHTML = String(yelt);
+			document.getElementById('redtotalp').innerHTML = String(redt);
+		}
+		
 	</script>
 	<div id = 'main'>
 		<div id='monstername'>
-			<p>Slime</p>
+			<p>Small</p>
+		</div>
+		<div id='yeltotal'>
+			<p id='yeltotalp'>0</p>
+		</div>
+		<div id='redtotal'>
+			<p id= 'redtotalp'>0</p>
+		</div>
+		<div id='redbutton'>
+			<button class = "resclick red" onclick="redresclick()"></button>
+		</div>
+		<div id='yellowbutton'>
+			<button class = "resclick yellow" onclick="yelresclick()"></button>
 		</div>
 	</div>
 </body>
