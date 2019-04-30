@@ -1,14 +1,16 @@
 @font-face {
     font-family: 'bubblewumpregular';
-    src: url('assets/bubblewump-webfont.woff2') format('woff2'),
-         url('assets/bubblewump-webfont.woff') format('woff');
+    src: url('assets/bubblewump-webfont.woff2') format('woff2');
+    src: url('assets/bubblewump-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 div#monstername {
 	position: absolute;
 	top: 200px;
-	left: 350px
+	left: 350px;
+	font-family: 'bubblewumpregular';
+	font-size: 30px;
 }
 div#main {
 	position: relative;
