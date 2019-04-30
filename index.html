@@ -10,8 +10,10 @@
 			top: 280px;
 			right: 200px
 		}
-		div#sketch-holder {
+		div.main {
 			position: relative;
+			width: 800;
+			height: 650;
 		}
     </style>
 </head>
@@ -19,7 +21,8 @@
 <body>		
 	<script type="text/javascript">
 		function setup(){
-			createCanvas(800,650);
+			var canv = createCanvas(800,650);
+			canv.parent('main');
 			bg = loadImage('assets/bg.png');
 			slime = loadImage('assets/slime.png');
 		}
@@ -29,7 +32,7 @@
 			image(monst,300,200);
 		}
 	</script>
-	<div id = 'sketch-holder'>
+	<div id = 'main'>
 		<div class='monstername'>
 			<p>Slime</p>
 		</div>
