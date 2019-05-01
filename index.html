@@ -13,6 +13,14 @@
 		var monst
 		var yelt = 100000
 		var redt = 0
+		var gret
+		var blut
+		var grat
+		var whit
+		var farmt = 0
+		var slat
+		var farmcost = [10,0,0,0,0,0]
+		var slacost = [0,0,0,0,0,0]
 		
 		function setup(){
 			var canv = createCanvas(800,650);
@@ -21,15 +29,12 @@
 			canv.parent('main');
 			bg = loadImage('assets/bg.png');
 			slime = loadImage('assets/slime.png');
-			farmico = loadImage('assets/farmicon.png');
 		}
 		
 		function draw(){
 			image(bg,0,0);
 			monst = slime;
 			image(monst,300,200);
-			image(farmico,0,50);
-			
 		}
 		
 		function yelresclick(){
@@ -42,7 +47,9 @@
 			upnums()
 			console.log('test')
 		}
-		
+		function farmclick(){
+			
+		}
 		function upnums(){
 			document.getElementById('yeltotalp').innerHTML = String(yelt);
 			document.getElementById('redtotalp').innerHTML = String(redt);
@@ -55,7 +62,7 @@
 	<div id = 'main'>
 		<div id='monstername'>
 			<p>Slime</p>
-		</div>
+		</div>	
 		<div id='yeltotal'>
 			<p id='yeltotalp'>0</p>
 		</div>
@@ -67,6 +74,60 @@
 		</div>
 		<div id='yellowbutton'>
 			<button class = "resclick yellow" onclick="yelresclick()"></button>
+		</div>
+		<div id='greenbutton'>
+			<button class = "resclick reslock"></button>
+		</div>
+		<div id='bluebutton'>
+			<button class = "resclick reslock"></button>
+		</div>
+		<div id='graybutton'>
+			<button class = "resclick reslock"></button>
+		</div>
+		<div id='whitebutton'>
+			<button class = "resclick reslock"></button>
+		</div>
+		<div id='farmbutton'>
+			<button class = "resbuild farm" onclick="farmclick()"></button>
+			<div id='farmtitle'>
+				<p class="buildtext">Farm</p>
+			</div>
+			<div id='farmowned'>
+				<p class="ownedtext">owned: 999</p>
+			</div>
+			<div id='farmproduce'>
+				<p class='producetext'>producing: 1/s</p>
+			</div>
+		</div>
+		<div id='slaughterbutton'>
+			<button class = "resbuild locked"></button>
+			<div id='slaughtertitle'>
+				<p class="buildtext">Locked</p>
+			</div>
+		</div>
+		<div id='thirdbutton'>
+			<button class = "resbuild locked"></button>
+			<div id='thirdtitle'>
+				<p class="buildtext">Locked</p>
+			</div>
+		</div>
+		<div id='fourthbutton'>
+			<button class = "resbuild locked"></button>
+			<div id='fourthtitle'>
+				<p class="buildtext">Locked</p>
+			</div>
+		</div>
+		<div id='fifthbutton'>
+			<button class = "resbuild locked"></button>
+			<div id='fifthtitle'>
+				<p class="buildtext">Locked</p>
+			</div>
+		</div>
+		<div id='sixthbutton'>
+			<button class = "resbuild locked"></button>
+			<div id='sixthtitle'>
+				<p class="buildtext">Locked</p>
+			</div>
 		</div>
 	</div>
 </body>
