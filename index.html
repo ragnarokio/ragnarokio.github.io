@@ -3,7 +3,6 @@
 <head> 
     <meta charset="UTF-8" />
     <title>Just another Clicker Game</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.js"></script>
     <link href="main.css" rel="stylesheet">
 </head>
 
@@ -25,21 +24,8 @@
 		var slacost = [0,0,0,0,0,0];
 		var buildpro = [0,0,0,0,0,0]
 		var costelements = [['fcy','fcr','fcg','fcb','fcs','fcw'],['scy','scr','scg','scb','scs','scw'],['3cy','3cr','3cg','3cb','3cs','3cw'],['4cy','4cr','4cg','4cb','4cs','4cw'],['5cy','5cr','5cg','5cb','5cs','5cw'],['6cy','6cr','6cg','6cb','6cs','6cw']];
-		
-		function setup(){
-			var canv = createCanvas(800,650);
-			let mouseX;
-			let mouseY;
-			canv.parent('main');
-			bg = loadImage('assets/bg.png');
-			slime = loadImage('assets/slime.png');
-		}
-		
-		function draw(){
-			image(bg,0,0);
-			monst = slime;
-			image(monst,300,200);
-		}
+
+		window.ondragstart = function() { return false; }
 		
 		function yelresclick(){
 			restot[0]++;
@@ -115,6 +101,21 @@
 		
 	</script>
 	<div id = 'main'>
+		<img src="assets/bg.png" alt="bg.png"></img>
+		<img src="assets/slime.png" alt="monster" id="monsterimg"></img>
+		<div id='farmupgrades'>
+			<img src="assets/farmupgrade.png" alt="farmupgrade.png"></img>
+			<img src="assets/fertbutton.png" alt="fertbutton.png" id="fertbutton" onclick="fertclick"></img>
+			<img src="assets/herdbutton.png" alt="herdbutton.png" id="herdbutton" onclick="herdclick"></img>
+			<img src="assets/growthbutton.png" alt="growthbutton.png" id="growthbutton" onclick="growthclick"></img>
+			<img src="assets/scythebutton.png" alt="scythebutton.png" id="scythebutton" onclick="scytheclick"></img>
+			<img src="assets/seedsbutton.png" alt="seedsbutton.png" id="seedsbutton" onclick="seedsclick"></img>
+			<img src="assets/deforestationbutton.png" alt="deforestationbutton.png" id="defbutton" onclick="defclick"></img>
+			<img src="assets/heavymachinerybutton.png" alt="heavymachinerybutton.png" id="hmbutton" onclick="hmclick"></img>
+			<img src="assets/expansionbutton.png" alt="expansionbutton.png" id="expbutton" onclick="expclick"></img>
+			<img src="assets/robotfarmerbutton.png" alt="robotfarmerbutton.png" id="rfbutton" onclick="rfclick"></img>
+			<img src="assets/croprotationbutton.png" alt="croprotationbutton.png" id="crbutton" onclick="crclick"></img>
+		</div>
 		<div id='monstername'>
 			<p>Slime</p>
 		</div>	

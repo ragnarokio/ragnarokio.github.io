@@ -12,6 +12,12 @@ div#main {
 	height: 650px;
 }
 
+img#monsterimg{
+	position:absolute;
+	top:200px;
+	left:300px;
+}
+
 div#monstername {
 	position: absolute;
 	top: 160px;
@@ -127,7 +133,71 @@ div#sixthbutton {
 	top: 350px;
 	left: 0px
 }
+div#farmupgrades{
+	position: absolute;
+	top:430px;
+	left:0px;
+}
 
+#fertbutton{
+	position:absolute;
+	top:70px;
+	left:5px;
+}
+
+#herdbutton{
+	position:absolute;
+	top:5px;
+	left:70px;
+}
+
+#growthbutton{
+	position:absolute;
+	top:70px;
+	left:135px;
+}
+
+#scythebutton{
+	position:absolute;
+	top:70px;
+	left:70px;
+}
+
+#seedsbutton{
+	position:absolute;
+	top:140px;
+	left:70px;
+}
+
+#defbutton{
+	position:absolute;
+	top:5px;
+	left:200px;
+}
+
+#hmbutton{
+	position:absolute;
+	top:140px;
+	left:265px;
+}
+
+#expbutton{
+	position:absolute;
+	top:70px;
+	left:265px;
+}
+
+#rfbutton{
+	position:absolute;
+	top:140px;
+	left:200px;
+}
+
+#crbutton{
+	position:absolute;
+	top:70px;
+	left:200px;
+}
 .costtext{
 	position: absolute;
 	font-family: 'arial';
