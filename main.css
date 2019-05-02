@@ -128,6 +128,23 @@ div#sixthbutton {
 	left: 0px
 }
 
+.costtext{
+	position: absolute;
+	font-family: 'arial';
+	font-size: 10px;
+	color: white;
+	user-select: none;
+	-ms-user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	text-shadow: rgb(0, 0, 0) 1px 0px 0px, rgb(0, 0, 0) 0.533333px 0.833333px 0px, rgb(0, 0, 0) -0.416667px 0.916667px 0px, rgb(0, 0, 0) -0.983333px 0.133333px 0px, rgb(0, 0, 0) -0.65px -0.75px 0px, rgb(0, 0, 0) 0.283333px -0.966667px 0px, rgb(0, 0, 0) 0.966667px -0.283333px 0px;
+}
+
+.costy{
+	top: -4px;
+	left:88px;
+}
+
 .buildtext{
 	position: absolute;
 	top: -15px;

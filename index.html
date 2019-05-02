@@ -10,22 +10,22 @@
 <body>		
 	<script type="text/javascript">
 		
-		var monst
-		var yelt = 100000
-		var redt = 0
-		var gret
-		var blut
-		var grat
-		var whit
-		var farmt = 0
-		var slat
-		var farmcost = [10,0,0,0,0,0]
-		var slacost = [0,0,0,0,0,0]
+		var monst;
+		var restot = [0,0,0,0,0,0]
+		var gret;
+		var blut;
+		var grat;
+		var whit;
+		var buildtot = [0,0,0,0,0,0]
+		var costarr = [[10,0,0,0,0,0],[0,10,0,0,0,0],[0,0,10,0,0,0],[0,0,0,10,0,0],[0,0,0,0,10,0],[0,0,0,0,0,10]];
+		var slacost = [0,0,0,0,0,0];
+		var buildpro = [0,0,0,0,0,0]
+		var costelements = [['fcy','fcr','fcg','fcb','fcs','fcw'],['scy','scr','scg','scb','scs','scw'],['3cy','3cr','3cg','3cb','3cs','3cw'],['4cy','4cr','4cg','4cb','4cs','4cw'],['5cy','5cr','5cg','5cb','5cs','5cw'],['6cy','6cr','6cg','6cb','6cs','6cw']];
 		
 		function setup(){
 			var canv = createCanvas(800,650);
-			let mouseX
-			let mouseY
+			let mouseX;
+			let mouseY;
 			canv.parent('main');
 			bg = loadImage('assets/bg.png');
 			slime = loadImage('assets/slime.png');
@@ -38,26 +38,61 @@
 		}
 		
 		function yelresclick(){
-			yelt += 1;
-			upnums()
+			restot[0]++;
 		}
 		
 		function redresclick(){
-			redt += 1;
-			upnums()
-			console.log('test')
+			restot[1]++;
 		}
+		
 		function farmclick(){
-			
+			var canafford = true;
+			for (i = 0; i < 6; i++){
+				if (restot[i] < costarr[0][i]){
+					canafford = false;
+				}
+			}
+			if (canafford == true){
+				buildtot[0]+=1;
+				for (i = 0; i < 6; i++){
+					restot[i] -=costarr[0][i]
+					costarr[0][i]= Math.round(costarr[0][i]*1.1);
+				}
+				
+			}
+		}
+		function calcpro(){
+			for(i = 0; i < 6; i++){
+				buildpro[i]=buildtot[i];
+			}
 		}
 		function upnums(){
-			document.getElementById('yeltotalp').innerHTML = String(yelt);
-			document.getElementById('redtotalp').innerHTML = String(redt);
+			document.getElementById('yeltotalp').innerHTML = String(restot[0]);
+			document.getElementById('redtotalp').innerHTML = String(restot[1]);
 		}
+		function buildupdate(){
+			document.getElementById('farmownedp').innerHTML = 'owned: '.concat(buildtot[0].toFixed(0));
+			document.getElementById('farmprop').innerHTML = 'producing: '.concat(buildpro[0].toFixed(0),'/s'); 
+			for (i = 0; i < 6; i++){
+				for (y = 0; y < 6; y++){
+					if(costarr[i][y] > 0){
+						document.getElementById(costelements[i][y]).innerHTML = costarr[i][y].toFixed(0)
+					}
+					else{
+						document.getElementById(costelements[i][y]).innerHTML = ''
+					}
+				}
+			}
+		}
+		
 		function mainLoop(){
-			requestAnimationFrame(mainLoop)
+			upnums();
+			buildupdate();
+			calcpro();
+			requestAnimationFrame(mainLoop);
 		}
-		requestAnimationFrame(mainLoop)
+		requestAnimationFrame(mainLoop);
+		
 	</script>
 	<div id = 'main'>
 		<div id='monstername'>
@@ -89,44 +124,84 @@
 		</div>
 		<div id='farmbutton'>
 			<button class = "resbuild farm" onclick="farmclick()"></button>
-			<div id='farmtitle'>
 				<p class="buildtext">Farm</p>
-			</div>
-			<div id='farmowned'>
-				<p class="ownedtext">owned: 999</p>
-			</div>
-			<div id='farmproduce'>
-				<p class='producetext'>producing: 1/s</p>
-			</div>
+				<p class="ownedtext" id="farmownedp">owned: 0</p>
+				<p class="producetext" id="farmprop">producing: 0/s</p>
+				<p class="costtext costy" id="fcy"></p>
+				<p class="costtext costr" id="fcr"></p>
+				<p class="costtext costg" id="fcg"></p>
+				<p class="costtext costb" id="fcb"></p>
+				<p class="costtext costs" id="fcs"></p>
+				<p class="costtext costw" id="fcw"></p>
 		</div>
 		<div id='slaughterbutton'>
 			<button class = "resbuild locked"></button>
 			<div id='slaughtertitle'>
 				<p class="buildtext">Locked</p>
+				<p class="ownedtext" id="slaownedp">owned: 0</p>
+				<p class="producetext" id="slaprop">producing: 0/s</p>
+				<p class="costtext costy" id="scy"></p>
+				<p class="costtext costr" id="scr"></p>
+				<p class="costtext costg" id="scg"></p>
+				<p class="costtext costb" id="scb"></p>
+				<p class="costtext costs" id="scs"></p>
+				<p class="costtext costw" id="scw"></p>
 			</div>
 		</div>
 		<div id='thirdbutton'>
 			<button class = "resbuild locked"></button>
 			<div id='thirdtitle'>
 				<p class="buildtext">Locked</p>
+				<p class="ownedtext" id="3ownedp">owned: 0</p>
+				<p class="producetext" id="3prop">producing: 0/s</p>
+				<p class="costtext costy" id="3cy"></p>
+				<p class="costtext costr" id="3cr"></p>
+				<p class="costtext costg" id="3cg"></p>
+				<p class="costtext costb" id="3cb"></p>
+				<p class="costtext costs" id="3cs"></p>
+				<p class="costtext costw" id="3cw"></p>
 			</div>
 		</div>
 		<div id='fourthbutton'>
 			<button class = "resbuild locked"></button>
 			<div id='fourthtitle'>
 				<p class="buildtext">Locked</p>
+				<p class="ownedtext" id="4ownedp">owned: 0</p>
+				<p class="producetext" id="4prop">producing: 0/s</p>
+				<p class="costtext costy" id="4cy"></p>
+				<p class="costtext costr" id="4cr"></p>
+				<p class="costtext costg" id="4cg"></p>
+				<p class="costtext costb" id="4cb"></p>
+				<p class="costtext costs" id="4cs"></p>
+				<p class="costtext costw" id="4cw"></p>
 			</div>
 		</div>
 		<div id='fifthbutton'>
 			<button class = "resbuild locked"></button>
 			<div id='fifthtitle'>
 				<p class="buildtext">Locked</p>
+				<p class="ownedtext" id="5ownedp">owned: 0</p>
+				<p class="producetext" id="5prop">producing: 0/s</p>
+				<p class="costtext costy" id="5cy"></p>
+				<p class="costtext costr" id="5cr"></p>
+				<p class="costtext costg" id="5cg"></p>
+				<p class="costtext costb" id="5cb"></p>
+				<p class="costtext costs" id="5cs"></p>
+				<p class="costtext costw" id="5cw"></p>
 			</div>
 		</div>
 		<div id='sixthbutton'>
 			<button class = "resbuild locked"></button>
 			<div id='sixthtitle'>
 				<p class="buildtext">Locked</p>
+				<p class="ownedtext" id="6ownedp">owned: 0</p>
+				<p class="producetext" id="6prop">producing: 0/s</p>
+				<p class="costtext costy" id="6cy"></p>
+				<p class="costtext costr" id="6cr"></p>
+				<p class="costtext costg" id="6cg"></p>
+				<p class="costtext costb" id="6cb"></p>
+				<p class="costtext costs" id="6cs"></p>
+				<p class="costtext costw" id="6cw"></p>
 			</div>
 		</div>
 	</div>
