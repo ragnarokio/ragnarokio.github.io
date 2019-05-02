@@ -10,6 +10,10 @@
 <body>		
 	<script type="text/javascript">
 		
+		var start = Date.now()
+		var lastcall = 0
+		var timepassed = 0
+		var secondtimer = 0
 		var monst;
 		var restot = [0,0,0,0,0,0]
 		var gret;
@@ -85,7 +89,23 @@
 			}
 		}
 		
+		function producestuff(){
+			for(i = 0; i < 6; i++){
+				restot[i]+=buildpro[i]
+			}
+		}
+		function clockstuff(){
+			lastcall = timepassed;
+			timepassed = Date.now() - start;
+			lastcall = timepassed - lastcall;
+			secondtimer +=lastcall;
+			if(secondtimer > 1000){
+				secondtimer = 0;
+				producestuff()
+			}
+		}
 		function mainLoop(){
+			clockstuff();
 			upnums();
 			buildupdate();
 			calcpro();
