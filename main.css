@@ -12,16 +12,114 @@ div#main {
 	height: 650px;
 }
 
+div#feedbox {
+	position: absolute;
+	top: 400px;
+	left: 360px;
+}
+
+div#evobar {
+	position: absolute;
+	top: 0px;
+	left: 700px;
+	width: 100px;
+	height: 100px;
+	background-color: red
+}
+p#feedboxtitle {
+	position: absolute;
+	top: -20px;
+	left: 3px;
+	font-family: 'bubblewumpregular';
+	font-size: 20px;
+	color: white;
+	user-select: none;
+	-ms-user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	text-shadow: rgb(0, 0, 0) 1px 0px 0px, rgb(0, 0, 0) 0.533333px 0.833333px 0px, rgb(0, 0, 0) -0.416667px 0.916667px 0px, rgb(0, 0, 0) -0.983333px 0.133333px 0px, rgb(0, 0, 0) -0.65px -0.75px 0px, rgb(0, 0, 0) 0.283333px -0.966667px 0px, rgb(0, 0, 0) 0.966667px -0.283333px 0px;
+}
+
+.feedclick {
+	position: absolute;
+	width:30px;
+	height:30px;
+	outline: none;
+	border: 1px solid black;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.yfeed{
+	top: 22px;
+	left: 3px;
+	background-color: #fff5b3;
+	background-image: url("assets/yellowicon.png");
+}
+
+.yfeed:hover{
+	background-color: #f8f0bb;
+}
+
+.yfeed:active{
+	background-color: #e7e1b9;
+	transform: translateY(1px);
+	box-shadow: 0 1px #666;
+}
+
+.rfeed{
+	top: 22px;
+	left: 33px;
+	background-color: #ffcaca;
+	background-image: url("assets/redicon.png");
+}
+
+.rfeed:hover{
+	background-color: #f8cdcd;
+}
+
+.rfeed:active{
+	background-color: #d7b4b4;
+	transform: translateY(1px);
+	box-shadow: 0 1px #666;
+}
+
+.feedlock{
+	position: absolute;
+	background-color: #888888;
+	background-image: url("assets/questionicon.png");
+}
+
+#feedlock1{
+	top:22px;
+	left: 63px;
+}
+
+#feedlock2{
+	top:22px;
+	left: 93px;
+}
+
+#feedlock3{
+	top:22px;
+	left: 123px;
+}
+
+#feedlock4{
+	top:22px;
+	left:153px;
+}
+
 img#monsterimg{
 	position:absolute;
 	top:200px;
-	left:300px;
+	left:370px;
 }
 
 div#monstername {
 	position: absolute;
 	top: 160px;
-	left: 0px;
+	left: 100px;
 	text-align: center;
 	width:800px;
 	font-family: 'bubblewumpregular';
@@ -36,8 +134,8 @@ div#monstername {
 	
 div#yeltotal{
 	position: absolute;
-	top: 325px;
-	left: 575px;
+	top: 388px;
+	left: 710px;
 	font-family: 'bubblewumpregular';
 	font-size: 20px;
 	color: white;
@@ -50,8 +148,8 @@ div#yeltotal{
 
 div#redtotal{
 	position: absolute;
-	top: 355px;
-	left: 575px;
+	top: 417px;
+	left: 710px;
 	font-family: 'bubblewumpregular';
 	font-size: 20px;
 	color: white;
