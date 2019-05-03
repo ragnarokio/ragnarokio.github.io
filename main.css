@@ -18,13 +18,35 @@ div#feedbox {
 	left: 360px;
 }
 
-div#evobar {
+img#bgborder{
 	position: absolute;
 	top: 0px;
-	left: 700px;
-	width: 100px;
-	height: 100px;
-	background-color: red
+	left: 0px;
+	z-index: 2
+}
+
+div#evobar {
+	position: absolute;
+	bottom: 500px;
+	left: 650px;
+	width: 150px;
+	height: 150px;
+	background-color: red;
+	z-index: 1
+}
+
+#evobutton{
+	position: absolute;
+	top: 25px;
+	left: 655px;
+	width: 125px;
+	height: 125px;
+	background-color: Transparent;
+	border: none;
+	z-index: 10;
+	border-radius: 50%;
+	background-image:  url("assets/evoicon.png");
+	visibility: hidden;
 }
 p#feedboxtitle {
 	position: absolute;
@@ -48,6 +70,14 @@ p#feedboxtitle {
 	border: 1px solid black;
 	background-repeat: no-repeat;
 	background-position: center;
+	z-index: 10
+}
+
+.yfeedd{
+	top: 22px;
+	left: 3px;
+	background-color: #e7e2bd;
+	background-image: url("assets/yellowicon.png");
 }
 
 .yfeed{
@@ -65,6 +95,13 @@ p#feedboxtitle {
 	background-color: #e7e1b9;
 	transform: translateY(1px);
 	box-shadow: 0 1px #666;
+}
+
+.rfeedd{
+	top: 22px;
+	left: 33px;
+	background-color: #dec4c4;
+	background-image: url("assets/redicon.png");
 }
 
 .rfeed{
@@ -90,22 +127,22 @@ p#feedboxtitle {
 	background-image: url("assets/questionicon.png");
 }
 
-#feedlock1{
+#feedclickg{
 	top:22px;
 	left: 63px;
 }
 
-#feedlock2{
+#feedclickb{
 	top:22px;
 	left: 93px;
 }
 
-#feedlock3{
+#feedclicks{
 	top:22px;
 	left: 123px;
 }
 
-#feedlock4{
+#feedclickw{
 	top:22px;
 	left:153px;
 }
@@ -116,7 +153,7 @@ img#monsterimg{
 	left:370px;
 }
 
-div#monstername {
+p#monstername {
 	position: absolute;
 	top: 160px;
 	left: 100px;
@@ -164,42 +201,49 @@ div#yellowbutton {
 	position: absolute;
 	top: 54px;
 	left: 210px;
+	z-index: 10;
 }
 
 div#redbutton {
 	position: absolute;
 	top: 114px;
 	left: 210px;
+	z-index: 10;
 }
 
 div#greenbutton {
 	position: absolute;
 	top: 174px;
 	left: 210px;
+	z-index: 10;
 }
 
 div#bluebutton {
 	position: absolute;
 	top: 234px;
 	left: 210px;
+	z-index: 10;
 }
 
 div#graybutton {
 	position: absolute;
 	top: 294px;
 	left: 210px;
+	z-index: 10;
 }
 
 div#whitebutton {
 	position: absolute;
 	top: 354px;
 	left: 210px;
+	z-index: 10;
 }
 
 div#farmbutton {
 	position: absolute;
 	top: 50px;
-	left: 0px
+	left: 0px;
+	z-index: 10;
 }
 
 div#farmbutton:active{
@@ -209,28 +253,34 @@ div#farmbutton:active{
 div#slaughterbutton {
 	position: absolute;
 	top: 110px;
-	left: 0px
+	left: 0px;
+	z-index: 10;
 }
 div#thirdbutton {
 	position: absolute;
 	top: 170px;
-	left: 0px
+	left: 0px;
+	z-index: 10;
 }
 div#fourthbutton {
 	position: absolute;
 	top: 230px;
-	left: 0px
+	left: 0px;
+	z-index: 10;
 }
 div#fifthbutton {
 	position: absolute;
 	top: 290px;
-	left: 0px
+	left: 0px;
+	z-index: 10;
 }
 div#sixthbutton {
 	position: absolute;
 	top: 350px;
-	left: 0px
+	left: 0px;
+	z-index: 10;
 }
+
 div#farmupgrades{
 	position: absolute;
 	top:430px;
@@ -241,60 +291,70 @@ div#farmupgrades{
 	position:absolute;
 	top:70px;
 	left:5px;
+	z-index: 10;
 }
 
 #herdbutton{
 	position:absolute;
 	top:5px;
 	left:70px;
+	z-index: 10;
 }
 
 #growthbutton{
 	position:absolute;
 	top:70px;
 	left:135px;
+	z-index: 10;
 }
 
 #scythebutton{
 	position:absolute;
 	top:70px;
 	left:70px;
+	z-index: 10;
 }
 
 #seedsbutton{
 	position:absolute;
 	top:140px;
 	left:70px;
+	z-index: 10;
 }
 
 #defbutton{
 	position:absolute;
 	top:5px;
 	left:200px;
+	z-index: 10;
 }
 
 #hmbutton{
 	position:absolute;
 	top:140px;
 	left:265px;
+	z-index: 10;
 }
 
 #expbutton{
 	position:absolute;
 	top:70px;
 	left:265px;
+	z-index: 10;
 }
 
 #rfbutton{
 	position:absolute;
 	top:140px;
 	left:200px;
+	z-index: 10;
 }
 
 #crbutton{
 	position:absolute;
 	top:70px;
 	left:200px;
+	z-index: 10;
 }
 .costtext{
 	position: absolute;
@@ -362,6 +422,7 @@ div#farmupgrades{
   box-shadow: 0 2px #999;
   background-repeat: no-repeat;
   background-position: center;
+  z-index: 10;
 }
 
 .red{

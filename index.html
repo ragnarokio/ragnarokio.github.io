@@ -18,11 +18,11 @@
 
 		class mondatabase {
 			constructor(){
-				var slime = new monster('slime',[[[100,0,0,0,0,0],'kau'],[[0,100,0,0,0,0],'wolf']],'slime.png');
-				var kau = new monster('kau',[[[1000,0,0,0,0,0],'kaubell']],'kau.png');
-				var wolf = new monster('wolf',[[[0,1000,0,0,0,0],'warg']],'wolf.png');
-				var kaubell = new monster('kaubell',[],'kaubell.png');
-				var warg = new monster('warg',[],'warg.png');
+				var slime = new monster('slime',[[[100,0,0,0,0,0],'kau','yellow'],[[0,100,0,0,0,0],'wolf','red']],'assets/slime.png');
+				var kau = new monster('kau',[[[1000,0,0,0,0,0],'kaubell','yellow']],'assets/kau.png');
+				var wolf = new monster('wolf',[[[0,1000,0,0,0,0],'warg','red']],'assets/wolf.png');
+				var kaubell = new monster('kaubell',[],'assets/kaubell.png');
+				var warg = new monster('warg',[],'assets/warg.png');
 				this.mons = [slime,kau,wolf,kaubell,warg];
 			}
 			getMon(name){
@@ -40,7 +40,8 @@
 		var lastcall = 0;
 		var timepassed = 0;
 		var secondtimer = 0;
-		var monst;
+		var monst = mondb.getMon('slime');
+		var evotarg;
 		var restot = [0,0,0,0,0,0];
 		var gret;
 		var blut;
@@ -62,7 +63,7 @@
 			}
 		}
 		function yelresclick(){
-			restot[0]++;
+			restot[0]+=5;
 		}
 		
 		function redresclick(){
@@ -114,6 +115,7 @@
 				restot[i]+=buildpro[i];
 			}
 		}
+		
 		function clockstuff(){
 			lastcall = timepassed;
 			timepassed = Date.now() - start;
@@ -124,29 +126,70 @@
 				producestuff();
 			}
 		}
+		
 		function evotracker(){
-			var evomon = mondb.getMon('slime');
+			var evomon = monst;
 			var progtotals = [];
 			for(i=0;i<evomon.evopaths.length;i++){
 				progcounts = 0;
 				prog = 0;
-				for(x=0;x<6;x++){
+				for(x=0;x<5;x++){
 					if(evomon.evopaths[i][0][x] > 0){
 						progcounts++;
-						prog += (evopool[x] / evomon.evopaths[i][0][x]);
+						prog += (evopool[x] / evomon.evopaths[i][0][x])*100;
 					}
 				}
-				progtotals.push([(prog/progcounts),evomon.evopaths[i][1]])
+				progtotals.push([(prog/progcounts),evomon.evopaths[i]])
 			}		
 			closestevo = '';
 			high = 0;
 			for(i=0;i<progtotals.length;i++){
 				if(progtotals[i][0] > high){
 					high = progtotals[i][0];
-					closestevo = progtotals[i][1]
+					closestevo = progtotals[i][1];
 				}
 			}
-			console.log(closestevo);
+			if(high>=100){
+				high = 100;
+				readytoevolve(closestevo);
+			}
+			document.getElementById('evobar').style.height = String(high*1.2).concat('px');
+			document.getElementById('evobar').style.backgroundColor = closestevo[2];
+
+		}
+		
+		function readytoevolve(evopath){
+			evotarg = mondb.getMon(evopath[1])
+			document.getElementById('evobutton').disabled = false;
+			document.getElementById('evobutton').style.visibility = 'visible';
+			document.getElementById('feedclicky').disabled = true;
+			document.getElementById('feedclicky').className = 'feedclick yfeedd';
+			document.getElementById('feedclickr').disabled = true;
+			document.getElementById('feedclickr').className = 'feedclick rfeedd';
+			document.getElementById('feedclickg').disabled = true;
+			document.getElementById('feedclickb').disabled = true;
+			document.getElementById('feedclicks').disabled = true;
+			document.getElementById('feedclickw').disabled = true;
+		}
+		
+		function evolve(){
+			monst = evotarg
+			document.getElementById('monsterimg').src = evotarg.img
+			document.getElementById('monstername').innerHTML = evotarg.name
+			document.getElementById('evobutton').style.visibility = 'hidden';
+			document.getElementById('feedclicky').disabled = false;
+			document.getElementById('feedclicky').className = 'feedclick yfeed'
+			document.getElementById('feedclickr').disabled = false;
+			document.getElementById('feedclickr').className = 'feedclick rfeed'
+			document.getElementById('feedclickg').disabled = false;
+			document.getElementById('feedclickb').disabled = false;
+			document.getElementById('feedclicks').disabled = false;
+			document.getElementById('feedclickw').disabled = false;
+			for(i=0;i<5;i++){
+				evopool[i] = 0;
+			}
+			evotracker();
+			document.getElementById('evobutton').disabled = true;
 		}
 		
 		function mainLoop(){
@@ -161,19 +204,21 @@
 		
 	</script>
 	<div id = 'main'>
-		<img src="assets/bg.png" alt="bg.png"></img>
+		<img src="assets/bgbar.png" alt="bgbar.png" id='bgborder'></img>
 		<div id="evobar"></div>
-		<img src="assets/bgborder.png" alt="bgborder.png"></img>
+		<img src="assets/bg.png" alt="bg.png" id='bg'></img>
 		<img src="assets/slime.png" alt="monster" id="monsterimg"></img>
+		<p id ='monstername'>Slime</p>
+		<button id = "evobutton" onclick="evolve()"></button>
 		<div id='feedbox'>
 			<img src='assets/feedbg.png' alt='feedbg.png'></img>
 			<p id = 'feedboxtitle'>Feed</p>
-			<button class = "feedclick yfeed" onclick="feedclick(0)"</button>
-			<button class = "feedclick rfeed" onclick="feedclick(1)"</button>
-			<button class = "feedclick feedlock" id ="feedlock1"</button>
-			<button class = "feedclick feedlock" id = "feedlock2"</button>
-			<button class = "feedclick feedlock" id = "feedlock3"</button>
-			<button class = "feedclick feedlock" id = "feedlock4"</button>
+			<button class = "feedclick yfeed" onclick="feedclick(0)" id="feedclicky"</button>
+			<button class = "feedclick rfeed" onclick="feedclick(1)" id="feedclickr"</button>
+			<button class = "feedclick feedlock" id ="feedclickg"</button>
+			<button class = "feedclick feedlock" id = "feedclickb"</button>
+			<button class = "feedclick feedlock" id = "feedclicks"</button>
+			<button class = "feedclick feedlock" id = "feedclickw"</button>
 		</div>
 		<div id='farmupgrades'>
 			<img src="assets/farmupgrade.png" alt="farmupgrade.png"></img>
@@ -188,9 +233,6 @@
 			<img src="assets/robotfarmerbutton.png" alt="robotfarmerbutton.png" id="rfbutton" onclick="rfclick"></img>
 			<img src="assets/croprotationbutton.png" alt="croprotationbutton.png" id="crbutton" onclick="crclick"></img>
 		</div>
-		<div id='monstername'>
-			<p>Slime</p>
-		</div>	
 		<div id='yeltotal'>
 			<p id='yeltotalp'>0</p>
 		</div>
