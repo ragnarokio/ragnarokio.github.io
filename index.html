@@ -26,7 +26,7 @@
 				this.mons = [slime,kau,wolf,kaubell,warg];
 			}
 			getMon(name){
-				for(i = 0;i < this.mons.length;i++){
+				for(var i = 0;i < this.mons.length;i++){
 					if(this.mons[i].name == name){
 						return(this.mons[i]);
 					}
@@ -174,8 +174,8 @@
 		
 		function evolve(){
 			monst = evotarg
-			document.getElementById('monsterimg').src = evotarg.img
-			document.getElementById('monstername').innerHTML = evotarg.name
+			document.getElementById('monsterimg').src = evotarg.image;
+			document.getElementById('monstername').innerHTML = evotarg.name;
 			document.getElementById('evobutton').style.visibility = 'hidden';
 			document.getElementById('feedclicky').disabled = false;
 			document.getElementById('feedclicky').className = 'feedclick yfeed'
