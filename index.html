@@ -8,336 +8,190 @@
 
 <body>		
 	<script type="text/javascript">
-		class monster {
-			constructor(name,evopaths,image){
-				this.name = name;
-				this.evopaths = evopaths;
-				this.image = image;
+		//0 = pop, 1 = space, 2 = food, 3 = wood, 4 = stone, 5 = thought, 6 = research, 7 = exploration
+		var resarr = [0,0,0,0,0,0,0,0]
+		var reslimitarr = [0,10,100,100,100,100,100,100]
+		
+		//0 = leanto
+		var buildarr = [0]
+		
+		//0 = lumberjack, 1 = explorer
+		var hirearr = [0,0]
+		
+		//prices
+		var lumberjackprice = [1,0,10,0,0,0,0,0]
+		var explorerprice = [1,0,50,0,0,0,0,0]
+		var leantoprice = [0,1,0,50,0,0,0,0]
+		
+		//clock variables
+		var start = Date.now();
+		var lastcall = 0
+		var secondtimer = 0
+		var timepassed = 0
+		
+		function riteclick(num){
+			if(num==0){ //food click
+				resarr[2] +=1
+			}
+			if(num==1){ //wood click
+				resarr[3] +=1
 			}
 		}
-
-		class mondatabase {
-			constructor(){
-				var slime = new monster('slime',[[[100,0,0,0,0,0],'kau','yellow'],[[0,100,0,0,0,0],'wolf','red']],'assets/slime.png');
-				var kau = new monster('kau',[[[1000,0,0,0,0,0],'kaubell','yellow']],'assets/kau.png');
-				var wolf = new monster('wolf',[[[0,1000,0,0,0,0],'warg','red']],'assets/wolf.png');
-				var kaubell = new monster('kaubell',[],'assets/kaubell.png');
-				var warg = new monster('warg',[],'assets/warg.png');
-				this.mons = [slime,kau,wolf,kaubell,warg];
-			}
-			getMon(name){
-				for(var i = 0;i < this.mons.length;i++){
-					if(this.mons[i].name == name){
-						return(this.mons[i]);
+		
+		function buildclick(num){
+			pricecheck = true
+			if(num==0){ //leanto
+				for(i=2;i<leantoprice.length;i++){
+					if(leantoprice[i]>resarr[i]){
+						pricecheck = false
 					}
 				}
+				if(reslimitarr[1] - resarr[1] < leantoprice[1]){
+					pricecheck = false
+				}
+				if(pricecheck == true){
+					buildarr[0]+=1
+					for(i=2;i<leantoprice.length;i++){
+						resarr[i] -= leantoprice[i]
+					}
+					resarr[1] += leantoprice[1]
+				}
 			}
+			if(num==1){ //lumber mill
+			}
+		}
+		
+		function unitclick(num){
+			pricecheck = true
+			if(num==0){ //lumberjack
+				for(i=2;i<lumberjackprice.length;i++){
+					if(lumberjackprice[i]>resarr[i]){
+						pricecheck = false
+					}
+				}
+				if(reslimitarr[0] - resarr[0] < lumberjackprice[0]){
+					pricecheck = false
+				}
+				if(pricecheck == true){
+					hirearr[0]+=1
+					for(i=2;i<lumberjackprice.length;i++){
+						resarr[i] -= lumberjackprice[i]
+					}
+					resarr[0] += lumberjackprice[0]
+				}
+			}
+			if(num==1){ //explorer
+				for(i=2;i<explorerprice.length;i++){
+					if(explorerprice[i]>resarr[i]){
+						pricecheck = false
+					}
+				}
+				if(reslimitarr[0] - resarr[0] < explorerprice[0]){
+					pricecheck = false
+				}
+				if(pricecheck == true){
+					hirearr[1]+=1
+					for(i=2;i<explorerprice.length;i++){
+						resarr[i] -= explorerprice[i]
+					}
+					resarr[0] += explorerprice[0]
+				}
+			}
+		}
+		
+		function resourceupdate(){
+			document.getElementById('popres').innerHTML = 'Population: '.concat(String(resarr[0]),'/',String(reslimitarr[0]))
+			document.getElementById('spaceres').innerHTML = 'Space Used: '.concat(String(resarr[1]),'/',String(reslimitarr[1]))
+			document.getElementById('foodres').innerHTML = 'Food: '.concat(String(resarr[2]),'/',String(reslimitarr[2]))
+			document.getElementById('woodres').innerHTML = 'Wood: '.concat(String(resarr[3]),'/',String(reslimitarr[3]))
+			document.getElementById('stoneres').innerHTML = 'Stone: '.concat(String(resarr[4]),'/',String(reslimitarr[4]))
+			document.getElementById('thoughtres').innerHTML = 'Thought: '.concat(String(resarr[5]),'/',String(reslimitarr[5]))
+			document.getElementById('researchres').innerHTML = 'Research: '.concat(String(resarr[6]),'/',String(reslimitarr[6]))
+			document.getElementById('explorationres').innerHTML = 'Exploration: '.concat(String(resarr[7]),'/',String(reslimitarr[7]))
+			document.getElementById('buildleanto').innerHTML = 'Lean-to ('.concat(String(buildarr[0]),')')
+			document.getElementById('hirelumberjack').innerHTML = 'Lumberjack ('.concat(String(hirearr[0]),')')
+			document.getElementById('hireexplorer').innerHTML = 'Explorer ('.concat(String(hirearr[1]),')')
 			
 		}
 		
-		var mondb = new mondatabase()
-		var start = Date.now();
-		var lastcall = 0;
-		var timepassed = 0;
-		var secondtimer = 0;
-		var monst = mondb.getMon('slime');
-		var evotarg;
-		var restot = [0,0,0,0,0,0];
-		var gret;
-		var blut;
-		var grat;
-		var whit;
-		var buildtot = [0,0,0,0,0,0];
-		var costarr = [[10,0,0,0,0,0],[0,10,0,0,0,0],[0,0,10,0,0,0],[0,0,0,10,0,0],[0,0,0,0,10,0],[0,0,0,0,0,10]];
-		var slacost = [0,0,0,0,0,0];
-		var buildpro = [0,0,0,0,0,0]
-		var costelements = [['fcy','fcr','fcg','fcb','fcs','fcw'],['scy','scr','scg','scb','scs','scw'],['3cy','3cr','3cg','3cb','3cs','3cw'],['4cy','4cr','4cg','4cb','4cs','4cw'],['5cy','5cr','5cg','5cb','5cs','5cw'],['6cy','6cr','6cg','6cb','6cs','6cw']];
-		var evopool = [0,0,0,0,0,0];
-		
-		window.ondragstart = function() { return false; }
-		
-		function feedclick(i){
-			if(restot[i]>0){
-				restot[i]--
-				evopool[i]++
-			}
-		}
-		function yelresclick(){
-			restot[0]+=5;
-		}
-		
-		function redresclick(){
-			restot[1]++;
-		}
-		
-		function farmclick(){
-			var canafford = true;
-			for (i = 0; i < 6; i++){
-				if (restot[i] < costarr[0][i]){
-					canafford = false;
-				}
-			}
-			if (canafford == true){
-				buildtot[0]+=1;
-				for (i = 0; i < 6; i++){
-					restot[i] -=costarr[0][i]
-					costarr[0][i]= Math.round(costarr[0][i]*1.1);
-				}
-				
-			}
-		}
-		function calcpro(){
-			for(i = 0; i < 6; i++){
-				buildpro[i]=buildtot[i];
-			}
-		}
-		function upnums(){
-			document.getElementById('yeltotalp').innerHTML = String(restot[0]);
-			document.getElementById('redtotalp').innerHTML = String(restot[1]);
-		}
-		function buildupdate(){
-			document.getElementById('farmownedp').innerHTML = 'owned: '.concat(buildtot[0].toFixed(0));
-			document.getElementById('farmprop').innerHTML = 'producing: '.concat(buildpro[0].toFixed(0),'/s'); 
-			for (i = 0; i < 6; i++){
-				for (y = 0; y < 6; y++){
-					if(costarr[i][y] > 0){
-						document.getElementById(costelements[i][y]).innerHTML = costarr[i][y].toFixed(0)
-					}
-					else{
-						document.getElementById(costelements[i][y]).innerHTML = ''
-					}
+		function capresources(){
+			for(i=2;i<resarr.length;i++){
+				if(reslimitarr[i]>resarr[i]){
+					resarr[i] = reslimitarr[i]
 				}
 			}
 		}
 		
-		function producestuff(){
-			for(i = 0; i < 6; i++){
-				restot[i]+=buildpro[i];
-			}
+		function popcap(){
+			totalpop = 0
+			totalpop += (buildarr[0]*2)
+			reslimitarr[0] = totalpop
 		}
 		
+		function hirelingproduction(){
+			resarr[3]+=hirearr[0]
+			resarr[7]+=hirearr[1]
+		}
+		
+		//time keeping function
 		function clockstuff(){
 			lastcall = timepassed;
 			timepassed = Date.now() - start;
 			lastcall = timepassed - lastcall;
 			secondtimer +=lastcall;
-			if(secondtimer > 1000){
-				secondtimer = 0;
-				producestuff();
+		}
+		
+		//things that happen every second
+		function onsecond(){
+			totrig = (secondtimer/1000)
+			for (totrig;totrig>0;totrig--){
+				hirelingproduction()
+				secondtimer -= 1000
 			}
 		}
 		
-		function evotracker(){
-			var evomon = monst;
-			var progtotals = [];
-			for(i=0;i<evomon.evopaths.length;i++){
-				progcounts = 0;
-				prog = 0;
-				for(x=0;x<5;x++){
-					if(evomon.evopaths[i][0][x] > 0){
-						progcounts++;
-						prog += (evopool[x] / evomon.evopaths[i][0][x])*100;
-					}
-				}
-				progtotals.push([(prog/progcounts),evomon.evopaths[i]])
-			}		
-			closestevo = '';
-			high = 0;
-			for(i=0;i<progtotals.length;i++){
-				if(progtotals[i][0] > high){
-					high = progtotals[i][0];
-					closestevo = progtotals[i][1];
-				}
-			}
-			if(high>=100){
-				high = 100;
-				readytoevolve(closestevo);
-			}
-			document.getElementById('evobar').style.height = String(high*1.2).concat('px');
-			document.getElementById('evobar').style.backgroundColor = closestevo[2];
-
-		}
-		
-		function readytoevolve(evopath){
-			evotarg = mondb.getMon(evopath[1])
-			document.getElementById('evobutton').disabled = false;
-			document.getElementById('evobutton').style.visibility = 'visible';
-			document.getElementById('feedclicky').disabled = true;
-			document.getElementById('feedclicky').className = 'feedclick yfeedd';
-			document.getElementById('feedclickr').disabled = true;
-			document.getElementById('feedclickr').className = 'feedclick rfeedd';
-			document.getElementById('feedclickg').disabled = true;
-			document.getElementById('feedclickb').disabled = true;
-			document.getElementById('feedclicks').disabled = true;
-			document.getElementById('feedclickw').disabled = true;
-		}
-		
-		function evolve(){
-			monst = evotarg
-			document.getElementById('monsterimg').src = evotarg.image;
-			document.getElementById('monstername').innerHTML = evotarg.name;
-			document.getElementById('evobutton').style.visibility = 'hidden';
-			document.getElementById('feedclicky').disabled = false;
-			document.getElementById('feedclicky').className = 'feedclick yfeed'
-			document.getElementById('feedclickr').disabled = false;
-			document.getElementById('feedclickr').className = 'feedclick rfeed'
-			document.getElementById('feedclickg').disabled = false;
-			document.getElementById('feedclickb').disabled = false;
-			document.getElementById('feedclicks').disabled = false;
-			document.getElementById('feedclickw').disabled = false;
-			for(i=0;i<5;i++){
-				evopool[i] = 0;
-			}
-			evotracker();
-			document.getElementById('evobutton').disabled = true;
-		}
-		
+		//main loop
 		function mainLoop(){
-			clockstuff();
-			upnums();
-			buildupdate();
-			calcpro();
-			evotracker();
-			requestAnimationFrame(mainLoop);
+			popcap() //determines population cap
+			clockstuff() //tracks time
+			onsecond() //triggers time-related functions
+			resourceupdate()
+			requestAnimationFrame(mainLoop)
 		}
-		requestAnimationFrame(mainLoop);
-		
+		requestAnimationFrame(mainLoop)
 	</script>
-	<div id = 'main'>
-		<img src="assets/bgbar.png" alt="bgbar.png" id='bgborder'></img>
-		<div id="evobar"></div>
-		<img src="assets/bg.png" alt="bg.png" id='bg'></img>
-		<img src="assets/slime.png" alt="monster" id="monsterimg"></img>
-		<p id ='monstername'>Slime</p>
-		<button id = "evobutton" onclick="evolve()"></button>
-		<div id='feedbox'>
-			<img src='assets/feedbg.png' alt='feedbg.png'></img>
-			<p id = 'feedboxtitle'>Feed</p>
-			<button class = "feedclick yfeed" onclick="feedclick(0)" id="feedclicky"</button>
-			<button class = "feedclick rfeed" onclick="feedclick(1)" id="feedclickr"</button>
-			<button class = "feedclick feedlock" id ="feedclickg"</button>
-			<button class = "feedclick feedlock" id = "feedclickb"</button>
-			<button class = "feedclick feedlock" id = "feedclicks"</button>
-			<button class = "feedclick feedlock" id = "feedclickw"</button>
+	<div id = 'main' class='border'>
+		<div id = 'resobar' class = 'border'> //test
+			<p>Resources</p>
+			<p id = 'popres'>Population: 0</p>
+			<p id = 'spaceres'>Space Used: 0</p>
+			<p id = 'foodres'>Food: 0</p>
+			<p id = 'woodres'>Wood: 0</p>
+			<p id = 'stoneres'>Stone: 0</p>
+			<p id = 'thoughtres'>Thought: 0</p>
+			<p id = 'researchres'>Research: 0</p>
+			<p id = 'explorationres'>Exploration: 0</p>
 		</div>
-		<div id='farmupgrades'>
-			<img src="assets/farmupgrade.png" alt="farmupgrade.png"></img>
-			<img src="assets/fertbutton.png" alt="fertbutton.png" id="fertbutton" onclick="fertclick"></img>
-			<img src="assets/herdbutton.png" alt="herdbutton.png" id="herdbutton" onclick="herdclick"></img>
-			<img src="assets/growthbutton.png" alt="growthbutton.png" id="growthbutton" onclick="growthclick"></img>
-			<img src="assets/scythebutton.png" alt="scythebutton.png" id="scythebutton" onclick="scytheclick"></img>
-			<img src="assets/seedsbutton.png" alt="seedsbutton.png" id="seedsbutton" onclick="seedsclick"></img>
-			<img src="assets/deforestationbutton.png" alt="deforestationbutton.png" id="defbutton" onclick="defclick"></img>
-			<img src="assets/heavymachinerybutton.png" alt="heavymachinerybutton.png" id="hmbutton" onclick="hmclick"></img>
-			<img src="assets/expansionbutton.png" alt="expansionbutton.png" id="expbutton" onclick="expclick"></img>
-			<img src="assets/robotfarmerbutton.png" alt="robotfarmerbutton.png" id="rfbutton" onclick="rfclick"></img>
-			<img src="assets/croprotationbutton.png" alt="croprotationbutton.png" id="crbutton" onclick="crclick"></img>
+		<div id = 'topbar' class = 'border'></div>
+		<div id = 'clickbar' class = 'border'>
+			<p>Rites</p>
+			<button class = "mainbutton" id = "gatherfood" onclick=riteclick(0)>Gather Food</button>
+			<button class = "mainbutton" id = "gatherwood" onclick=riteclick(1)>Gather Wood</button>
 		</div>
-		<div id='yeltotal'>
-			<p id='yeltotalp'>0</p>
+		<div id = 'buildbar' class = 'border'>
+			<p>Buildings</p>
+			<button class = "mainbutton" id = "buildleanto" onclick=buildclick(0)>Lean-to</button>
 		</div>
-		<div id='redtotal'>
-			<p id= 'redtotalp'>0</p>
+		<div id = 'unitbar' class = 'border'>
+			<p>Units</p>
+			<button class = "mainbutton" id = "hirelumberjack" onclick=unitclick(0)>Lumerjack</button>
+			<button class = "mainbutton" id = "hireexplorer" onclick=unitclick(1)>Explorer</button>
 		</div>
-		<div id='redbutton'>
-			<button class = "resclick red" onclick="redresclick()"></button>
+		<div id = 'resbar' class = 'border'>
+			<p>Research</p>
 		</div>
-		<div id='yellowbutton'>
-			<button class = "resclick yellow" onclick="yelresclick()"></button>
-		</div>
-		<div id='greenbutton'>
-			<button class = "resclick reslock"></button>
-		</div>
-		<div id='bluebutton'>
-			<button class = "resclick reslock"></button>
-		</div>
-		<div id='graybutton'>
-			<button class = "resclick reslock"></button>
-		</div>
-		<div id='whitebutton'>
-			<button class = "resclick reslock"></button>
-		</div>
-		<div id='farmbutton'>
-			<button class = "resbuild farm" onclick="farmclick()"></button>
-				<p class="buildtext">Farm</p>
-				<p class="ownedtext" id="farmownedp">owned: 0</p>
-				<p class="producetext" id="farmprop">producing: 0/s</p>
-				<p class="costtext costy" id="fcy"></p>
-				<p class="costtext costr" id="fcr"></p>
-				<p class="costtext costg" id="fcg"></p>
-				<p class="costtext costb" id="fcb"></p>
-				<p class="costtext costs" id="fcs"></p>
-				<p class="costtext costw" id="fcw"></p>
-		</div>
-		<div id='slaughterbutton'>
-			<button class = "resbuild locked"></button>
-			<div id='slaughtertitle'>
-				<p class="buildtext">Locked</p>
-				<p class="ownedtext" id="slaownedp">owned: 0</p>
-				<p class="producetext" id="slaprop">producing: 0/s</p>
-				<p class="costtext costy" id="scy"></p>
-				<p class="costtext costr" id="scr"></p>
-				<p class="costtext costg" id="scg"></p>
-				<p class="costtext costb" id="scb"></p>
-				<p class="costtext costs" id="scs"></p>
-				<p class="costtext costw" id="scw"></p>
-			</div>
-		</div>
-		<div id='thirdbutton'>
-			<button class = "resbuild locked"></button>
-			<div id='thirdtitle'>
-				<p class="buildtext">Locked</p>
-				<p class="ownedtext" id="3ownedp">owned: 0</p>
-				<p class="producetext" id="3prop">producing: 0/s</p>
-				<p class="costtext costy" id="3cy"></p>
-				<p class="costtext costr" id="3cr"></p>
-				<p class="costtext costg" id="3cg"></p>
-				<p class="costtext costb" id="3cb"></p>
-				<p class="costtext costs" id="3cs"></p>
-				<p class="costtext costw" id="3cw"></p>
-			</div>
-		</div>
-		<div id='fourthbutton'>
-			<button class = "resbuild locked"></button>
-			<div id='fourthtitle'>
-				<p class="buildtext">Locked</p>
-				<p class="ownedtext" id="4ownedp">owned: 0</p>
-				<p class="producetext" id="4prop">producing: 0/s</p>
-				<p class="costtext costy" id="4cy"></p>
-				<p class="costtext costr" id="4cr"></p>
-				<p class="costtext costg" id="4cg"></p>
-				<p class="costtext costb" id="4cb"></p>
-				<p class="costtext costs" id="4cs"></p>
-				<p class="costtext costw" id="4cw"></p>
-			</div>
-		</div>
-		<div id='fifthbutton'>
-			<button class = "resbuild locked"></button>
-			<div id='fifthtitle'>
-				<p class="buildtext">Locked</p>
-				<p class="ownedtext" id="5ownedp">owned: 0</p>
-				<p class="producetext" id="5prop">producing: 0/s</p>
-				<p class="costtext costy" id="5cy"></p>
-				<p class="costtext costr" id="5cr"></p>
-				<p class="costtext costg" id="5cg"></p>
-				<p class="costtext costb" id="5cb"></p>
-				<p class="costtext costs" id="5cs"></p>
-				<p class="costtext costw" id="5cw"></p>
-			</div>
-		</div>
-		<div id='sixthbutton'>
-			<button class = "resbuild locked"></button>
-			<div id='sixthtitle'>
-				<p class="buildtext">Locked</p>
-				<p class="ownedtext" id="6ownedp">owned: 0</p>
-				<p class="producetext" id="6prop">producing: 0/s</p>
-				<p class="costtext costy" id="6cy"></p>
-				<p class="costtext costr" id="6cr"></p>
-				<p class="costtext costg" id="6cg"></p>
-				<p class="costtext costb" id="6cb"></p>
-				<p class="costtext costs" id="6cs"></p>
-				<p class="costtext costw" id="6cw"></p>
-			</div>
+		<div id = 'expbar' class = 'border'>
+			<p>Expeditions</p>
 		</div>
 	</div>
 </body>
